@@ -5,9 +5,7 @@ from nonebot.matcher import Matcher
 from nonebot.adapters import Message
 from nonebot.params import Arg, CommandArg, ArgPlainText
 
-
-
-import  warden as wd
+from . import warden as wd
 import spider as sp
 mag_search = on_command("mag_search", rule=to_me(), aliases={"磁链", "磁力", "magnet", "磁链搜索", "磁力搜索"}, priority=5)
 
