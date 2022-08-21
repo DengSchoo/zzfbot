@@ -20,7 +20,7 @@ async def handle_first_receive(bot: Bot, event: Event):
     user_id = event.get_user_id
     if not wd.warden_id(user_id):
         await mag_search.finish(Message(f'[CQ:at, qq={user_id}] √ ⑧ who?'))
-    message = event.get_message
-    key_word = str(message).encode('utf-8')
+    message = event.get_message()
+    key_word = str(message).strip().encode('utf-8')
     res = sp.search_res(key_word)
     await mag_search.finish(Message(f'[CQ:at, qq={user_id}] \n {str(event.get_message)}磁链搜索结果如下：{res}'))
