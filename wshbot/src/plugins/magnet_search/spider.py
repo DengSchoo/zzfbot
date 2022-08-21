@@ -51,6 +51,7 @@ sec_search_path = '//*[@id="header"]/div/div[3]/div[2]/div[1]/div[5]/div[2]'
 # //*[@id="header"]/div/div[3]/div[2]/div[1]/div[5]/div[2]/ul
 sec_inner_path = '//*[@id="header"]/div/div[3]/div[2]/div[1]/div[5]/div[2]/ul/table[1]/tbody/tr[2]/td[2]/b/a'
 
+
 # //*[@id="Zoom"]/span/table/tbody/tr/td/a
 # //*[@id="header"]/div/div[3]/div[2]/div[1]/div[5]/div[2]/ul/table[1]/tbody/tr[2]/td[2]/b/a
 # //*[@id="header"]/div/div[3]/div[2]/div[1]/div[5]/div[2]/ul/table[2]/tbody/tr[2]/td[2]/b/a
@@ -69,18 +70,22 @@ def search_res(keyword):
     }
     post = requests.post(search_url, data=search_data, headers=headers)
     post.encoding = "gbk"
-    print(post.text)
-
+    # print(post.text)
+    # if '没有搜索到相关的内容' in post.text
     magnet = sec_search_page(post.text, keyword)
-    print(magnet)
-    mag_str = keyword.decode("utf-8") + "前三搜索结果如下：\n"
-    for k,v in magnet.items():
+    # print(magnet)
+    mag_str = "\n"
+    for k, v in magnet.items():
         mag_str += k + ":\n"
+        if v is None:
+            mag_str += "搜索结果为空。"
+            continue
         for idx in range(len(v)):
             mag_str += f'【{idx + 1}】' + v[idx] + "\n"
-        mag_str += "\n\n"
-    print(mag_str)
+        mag_str += "\n"
+    # print(mag_str)
     return mag_str
+
 
 def sec_search_page(html, keyword):
     ret = {}
@@ -90,41 +95,63 @@ def sec_search_page(html, keyword):
     if length > 3:
         length = 3
     for i in range(length):
-        print(search_url + res[i])
+        print(sec_page_url + res[i])
         ret[title[i]] = get_res_magnet(sec_page_url + res[i], keyword.decode("utf-8").encode("gbk"))
-    print(ret)
+    # print(ret)
     return ret
+
+
+def filter(str: str) -> str:
+    filter_strs = ['[电影天堂www.dytt89.com]', '电影天堂www.dy2018.com.mkv', '[电影天堂www.dy2018.com]']
+    for item in filter_strs:
+        if item in str:
+            splits = str.split(item)
+            return splits[0] + splits[1]
+    # if filter_str in str:
+    #     splits = str.split(filter_str)
+    #     return splits[0] + splits[1]
+    return str
 
 
 def get_res_magnet(url, keyword):
     request = requests.get(url, headers=headers)
     request.encoding = "gbk"
     tree = etree.HTML(request.text)
-    print(request.text)
+    # print(request.text)
     maglist = tree.xpath('//*[@id="downlist"]')
     if len(maglist) == 0:
         return
     maglist = maglist[0]
     ret_mag = []
     length = int(len(maglist) / 2)
+    start = 0
+    # if length > 50:
+    #     start = 15
+        # length = 45
     if length != 0:
-        for i in range(length):
-            ret_mag.append(maglist.xpath('./table[' + (i + 1).__str__() + ']/tbody/tr/td/a//@href')[0])
+        for i in range(start, length):
+            ret_mag.append(filter(maglist.xpath('./table[' + (i + 1).__str__() + ']/tbody/tr/td/a//@href')[0]))
             # print(ret_mag[i])
-            print(maglist.xpath('./table[' + (i + 1).__str__() + ']/tbody/tr/td/a//@href'))
+            # print(maglist.xpath('./table[' + (i + 1).__str__() + ']/tbody/tr/td/a//@href'))
     else:
         # ret_mag = re.findall('href=\"(ftp://[^"]*)\"', request.text)
         ret_mag.append(keyword + "当前资源存在 但是无磁链")
-        print(ret_mag)
-    print(ret_mag)
+        # print(ret_mag)
+    # print(ret_mag)
+    if length > 40:
+        return ret_mag[:45]
     return ret_mag
+
 
 def get_home_html():
     request = requests.get(base_url, headers=headers)
     request.encoding = "gbk"
     return request.text
 
+
 testurl = 'https://m.xiaopian.com/e/search/result/?searchid=106204'
+
+
 def testUrl(url):
     request = requests.get(url, headers=headers)
     request.encoding = "gbk"
@@ -173,10 +200,10 @@ def get_home_list(tree, path):
 #         break
 #     print(sec_page.text)
 
-#search_res('铁血战士'.encode("utf-8"))
+# search_res('铁血战士'.encode("utf-8"))
 
-#get_res_magnet(test_url)
+# get_res_magnet(test_url)
 
-#testUrl('https://m.xiaopian.com/e/search/result/?searchid=96965')
+# testUrl('https://m.xiaopian.com/e/search/result/?searchid=96965')
 print('中文')
 # print(request.text)
