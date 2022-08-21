@@ -173,7 +173,7 @@ def get_home_list(tree, path):
 #         break
 #     print(sec_page.text)
 
-search_res('铁血战士'.encode("utf-8"))
+#search_res('铁血战士'.encode("utf-8"))
 
 #get_res_magnet(test_url)
 
