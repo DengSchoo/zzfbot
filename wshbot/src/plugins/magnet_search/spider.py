@@ -60,7 +60,7 @@ sec_inner_path = '//*[@id="header"]/div/div[3]/div[2]/div[1]/div[5]/div[2]/ul/ta
 
 def search_res(keyword):
     submit = "立即搜索"
-    gbk_key_word = keyword.decode("utf-8").encode("gbk")
+    gbk_key_word = keyword.decode("utf-8").encode("gbk", 'ignore')
     search_data = {
         "show": "title",
         "tempid": "1",
