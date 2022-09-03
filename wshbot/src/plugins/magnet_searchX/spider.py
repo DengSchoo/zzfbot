@@ -68,4 +68,4 @@ def get_mag(sec_page):
     return res_name + res_file_num + res_size + res_time + res_dow_times + res_mag
 
 
-print(search_res('钢铁侠'.encode('utf-8')))
+#print(search_res('钢铁侠'.encode('utf-8')))
