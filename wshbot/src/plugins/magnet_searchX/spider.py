@@ -13,7 +13,7 @@ headers = {
 
 '//*[@id="Search_list_wrapper"]/li[1]/div[1]/div/a'
 
-max_search = 5
+max_search = 2
 
 
 def search_res(keyword):
@@ -39,8 +39,10 @@ def search_res(keyword):
         # res_name = tree.xpath('/html/body/div[1]/div[2]/div[2]/ul/li[' + str(i + 1) + ']/div[1]/div/a/text()')[0]
         ret_mag.append('【' + ((i + 1).__str__()) + '】' + get_mag(sec_page=sec_page_url))
         # print( sec_page_url)
-    # for ()
-    return ret_mag
+    if len(ret_mag) == 0:
+        return "搜索结果为空！"
+
+    return '\n'.join(ret_mag)
 
 
 tab_str = '    '
@@ -51,7 +53,7 @@ def get_mag(sec_page):
     tree = etree.HTML(html.text)
     # print(html.text)
     res_name = tree.xpath('/html/body/div[1]/div[2]/div[2]/h1/text()')[0] + '\n'
-    res_mag = tab_str + '资源链接' + tree.xpath('//*[@id="down-url"]//@href')[0] + '\n'
+    res_mag = tab_str + '资源链接：' + tree.xpath('//*[@id="down-url"]//@href')[0]
     res_file_num = tab_str + '文件数量：' + tree.xpath('/html/body/div[1]/div[2]/div[2]/div[2]/div[2]/b[1]/text()')[
         0] + '\n'
     #print(res_file_num)
@@ -66,4 +68,4 @@ def get_mag(sec_page):
     return res_name + res_file_num + res_size + res_time + res_dow_times + res_mag
 
 
-#print(search_res('钢铁侠'.encode('utf-8')))
+print(search_res('钢铁侠'.encode('utf-8')))
