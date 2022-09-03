@@ -56,5 +56,6 @@ async def handle_first_receive(bot: Bot, event: Event):
     if Warden_admin(user_id):
         message_processor(user_id, cmd, target)
         await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + f'[CQ:at,qq={int(target)}]'
-                                              + f"权限更改成功"))
-    await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + '权限不足'))
+                                          + f"权限更改成功"))
+    else:
+        await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + '权限不足'))
