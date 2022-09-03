@@ -13,22 +13,22 @@ users = {2787614041, 1425123490}
 
 
 def message_processor(user, cmd: str, target: int):
-    print(cmd)
+
     if cmd == 'add':
-        add_usr(target)
-        return
+        return add_usr(target)
+
     if cmd == 'rm':
-        rmv_usr(target)
-        return
+        return rmv_usr(target)
+
 
 
 def add_usr(userid):
     users.add(userid)
-    print(users)
+    return '添加成功'
 
 def rmv_usr(userid):
     users.discard(userid)
-    print(users)
+    return '删除成功'
 
 
 def Warden_User(id: int) -> bool:
@@ -61,10 +61,10 @@ async def handle_first_receive(bot: Bot, event: Event):
         splits = str(message).strip().split(' ')
         if len(splits) < 2:
             return warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + '缺少参数'))
-        cmd = splits[1].encode('utf-8')
+        cmd = splits[1]
         comp = re.compile('\d+')
         target = int(comp.findall(splits[2])[0])
-        message_processor(user_id, cmd, target)
+        msg = message_processor(user_id, cmd, target)
         return await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + f'[CQ:at,qq={int(target)}]'
-                                                 + f"权限更改成功"))
+                                                 + f"权限更改成功：{msg}" ))
     await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + '权限不足'))
