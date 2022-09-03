@@ -29,12 +29,12 @@ def rmv_usr(userid):
     users.discard(userid)
 
 
-def Warden_User(id):
+def Warden_User(id: int):
     # 判断是否是wly
     return id in users
 
 
-def Warden_admin(id):
+def Warden_admin(id: int):
     # 判断是否是wly
     return id in admins
 
