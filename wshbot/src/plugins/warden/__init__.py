@@ -23,18 +23,19 @@ def message_processor(user, cmd: str, target: int):
 
 def add_usr(userid):
     users.add(userid)
-
+    print(users)
 
 def rmv_usr(userid):
     users.discard(userid)
+    print(users)
 
 
-def Warden_User(id: int):
+def Warden_User(id: int) -> bool:
     # 判断是否是wly
     return id in users
 
 
-def Warden_admin(id: int):
+def Warden_admin(id: int) -> bool:
     # 判断是否是wly
     return id in admins
 
