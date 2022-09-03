@@ -13,6 +13,7 @@ users = {2787614041, 1425123490}
 
 
 def message_processor(user, cmd: str, target: int):
+    print(cmd)
     if cmd == 'add':
         add_usr(target)
         return
