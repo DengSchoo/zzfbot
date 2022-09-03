@@ -1,0 +1,60 @@
+from nonebot import on_command
+from nonebot.adapters.onebot.v11 import Bot, Event
+from nonebot.rule import to_me
+from nonebot.matcher import Matcher
+from nonebot.adapters.onebot.v11.message import Message
+from nonebot.params import Arg, CommandArg, ArgPlainText
+
+super_user = '1425123490'
+admins = {'2787614041', '1425123490'}
+users = {'2787614041', '1425123490'}
+
+def message_processor(user ,cmd, target):
+    if cmd == 'add':
+        add_usr(target)
+        return
+    if cmd == 'rm':
+        rmv_usr(target)
+        return
+
+
+def add_usr(userid):
+    users.add(userid)
+
+def rmv_usr(userid):
+    users.remove(userid)
+
+def Warden_super(id):
+    # 判断是否是wly
+    if id == super_user:
+        return True
+    return False
+
+def Warden_admin(id):
+    # 判断是否是wly
+    if id in admins:
+        return True
+    return False
+
+def Warden_messgae(id):
+    # 判断是否是wly
+    if id in admins:
+        return True
+    return False
+
+
+warden = on_command("warden", aliases={"wd"}, priority=5)
+
+@warden.handle()
+async def handle_first_receive(bot: Bot, event: Event):
+    user_id = int(event.get_user_id())
+    # if not wd.warden_id(str(user_id)):
+    #     await mag_search.send(Message(f'[CQ:at, qq={int(user_id)}] √ ⑧ who?'))
+    message = event.get_message()
+    cmd = str(message).strip().split(' ')[1].encode('utf-8')
+    target = int((message).strip().split(' ')[2].encode('utf-8'))
+    if warden_admin(user_id):
+        message_processor(user_id, cmd, target)
+        await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + f'[CQ:at,qq={int(target)}]'
+                                              + f"权限更改成功"))
+    await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + '权限不足'))
