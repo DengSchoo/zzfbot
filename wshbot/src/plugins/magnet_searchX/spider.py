@@ -24,7 +24,8 @@ def search_res(keyword):
     html = requests.get(base_search_url + keyword.decode('utf-8'), headers=headers)
 
     tree = etree.HTML(html.text)
-    search_list = tree.xpath('//*[@id="Search_list_wrapper"]')
+
+    search_list = tree.xpath('/html/body/div[1]/div[2]/div[2]/ul')
     if len(search_list) == 0:
         return None
     # print(len(search_list[0]))
@@ -43,7 +44,6 @@ def search_res(keyword):
         # print( sec_page_url)
     if len(ret_mag) == 0:
         return "搜索结果为空！"
-
     return '\n'.join(ret_mag)
 
 
@@ -70,5 +70,4 @@ def get_mag(sec_page):
     return res_name + res_file_num + res_size + res_time + res_dow_times + res_mag
 
 
-#print(search_res('钢铁侠'.encode('utf-8')))
-#
+print(search_res('laf-41'.encode('utf-8')))
