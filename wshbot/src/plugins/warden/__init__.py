@@ -5,9 +5,9 @@ from nonebot.matcher import Matcher
 from nonebot.adapters.onebot.v11.message import Message
 from nonebot.params import Arg, CommandArg, ArgPlainText
 
-super_user = '1425123490'
-admins = {'2787614041', '1425123490'}
-users = {'2787614041', '1425123490'}
+super_user = 1425123490
+admins = {2787614041, 1425123490}
+users = {2787614041, 1425123490}
 
 def message_processor(user ,cmd, target):
     if cmd == 'add':
