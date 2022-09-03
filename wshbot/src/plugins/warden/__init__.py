@@ -24,9 +24,9 @@ def add_usr(userid):
 def rmv_usr(userid):
     users.remove(userid)
 
-def Warden_super(id):
+def Warden_User(id):
     # 判断是否是wly
-    if id == super_user:
+    if id in users:
         return True
     return False
 
@@ -52,8 +52,8 @@ async def handle_first_receive(bot: Bot, event: Event):
     #     await mag_search.send(Message(f'[CQ:at, qq={int(user_id)}] √ ⑧ who?'))
     message = event.get_message()
     cmd = str(message).strip().split(' ')[1].encode('utf-8')
-    target = int((message).strip().split(' ')[2].encode('utf-8'))
-    if warden_admin(user_id):
+    target = str(message).strip().split(' ')[2].encode('utf-8')
+    if Warden_admin(user_id):
         message_processor(user_id, cmd, target)
         await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + f'[CQ:at,qq={int(target)}]'
                                               + f"权限更改成功"))
