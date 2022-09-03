@@ -12,7 +12,7 @@ admins = {2787614041, 1425123490}
 users = {2787614041, 1425123490}
 
 
-def message_processor(user, cmd, target):
+def message_processor(user, cmd: str, target: int):
     if cmd == 'add':
         add_usr(target)
         return
@@ -26,21 +26,17 @@ def add_usr(userid):
 
 
 def rmv_usr(userid):
-    users.remove(userid)
+    users.discard(userid)
 
 
 def Warden_User(id):
     # 判断是否是wly
-    if id in users:
-        return True
-    return False
+    return id in users
 
 
 def Warden_admin(id):
     # 判断是否是wly
-    if id in admins:
-        return True
-    return False
+    return id in admins
 
 
 def Warden_messgae(id):
