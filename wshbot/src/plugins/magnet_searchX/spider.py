@@ -72,4 +72,4 @@ def get_mag(sec_page):
 
 #print(search_res('钢铁侠'.encode('utf-8')))
 comp = re.compile('\d+')
-print(comp.findall('CQ: qq=1425123490'))
+print(comp.findall('[CQ: qq=1425123490]'))

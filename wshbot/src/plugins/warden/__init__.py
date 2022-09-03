@@ -65,7 +65,7 @@ async def handle_first_receive(bot: Bot, event: Event):
             return warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + '缺少参数'))
         cmd = splits[1].encode('utf-8')
         comp = re.compile('\d+')
-        target = int(comp.findall(str(message).strip().split(' ')[2])[0])
+        target = int(comp.findall(splits[2])[0])
         message_processor(user_id, cmd, target)
         return await warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + f'[CQ:at,qq={int(target)}]'
                                                  + f"权限更改成功"))
