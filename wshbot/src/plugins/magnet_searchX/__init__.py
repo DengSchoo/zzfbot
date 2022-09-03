@@ -15,7 +15,7 @@ mag_search = on_command("mag_searchX", aliases={"全资源磁力搜索"}, priori
 async def handle_first_receive(bot: Bot, event: Event):
     user_id = int(event.get_user_id())
     if not Warden_User(int(user_id)):
-        return await mag_search.send(Message(f'[CQ:at,qq={int(user_id)}]' + '找wsh申请权限~'))
+        return await mag_search.send(Message(f'[CQ:at,qq={int(user_id)}]' + '找王姐或者wsh申请权限~'))
     message = event.get_message()
     key_word = str(message).strip().split(' ')[1].encode('utf-8')
     res = sp.search_res(key_word)
