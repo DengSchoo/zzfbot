@@ -65,7 +65,7 @@ async def handle_first_receive(bot: Bot, event: Event):
             return warden.send(message=Message(f'[CQ:at,qq={int(user_id)}]' + '缺少参数'))
         cmd = splits[1]
         comp = re.compile('\d+')
-        target = comp.findall(splits[2])
+        target = comp.findall(''.join(splits[2:]))
         msg = message_processor(user_id, cmd, target)
         ret_msg = ''
         for item in target:
