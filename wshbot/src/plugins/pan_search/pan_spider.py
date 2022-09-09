@@ -9,7 +9,7 @@ from lxml import etree
 aliyun_url = 'https://www.alipansou.com'
 baidu_url = 'https://www.xiongdipan.com'
 
-proxy = '113.194.28.190:9999'
+proxy = '182.61.59.47:9999'
 
 proxies = {
     'http': 'http://' + proxy,
