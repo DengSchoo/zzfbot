@@ -117,14 +117,14 @@ def pan_res_search(keyword: str):
     print(''.join(splits))
     lenth = len(splits)
     search_key = ''
-    if len == 1 or len == 2:
+    if lenth == 1 or lenth == 2:
         return '搜索参数为空'
     domain = get_search_domain(splits[1])
-    if len == 3:
+    if lenth == 3:
         search_key = splits[2]
-    if len == 4:
+    if lenth == 4:
         search_key = splits[1] + get_search_sort_op(splits[2])
-    if len == 5:
+    if lenth == 5:
         search_key = splits[1] + get_search_sort_op(splits[2]) + get_search_type_op(splits[3])
     res = get_list(domain, search_key)
     print(domain + search_key)
