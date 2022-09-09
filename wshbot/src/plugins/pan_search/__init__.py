@@ -26,18 +26,18 @@ async def handle_first_receive(bot: Bot, event: Event):
 
 pan_search_help = on_command("pan_help", aliases={"网盘搜索帮助",  "help", "pan_help"}, priority=5)
 
-tab_str = "\t"
+tab_str = "\t\t"
 
-help_str = "格式：pan_search/ps 网盘源 搜索内容 排序 文件类型\n"
-help_source = f"{tab_str}命令: 阿里云：aliyun、al。百度网盘：baidu、bd\n"
-help_content = f"{tab_str}内容：搜索内容，多内容用+连接\n"
+help_str = "【格式】：pan_search/ps 网盘源 搜索内容 排序 文件类型\n"
+help_source = f"{tab_str}【命令】: 阿里云：aliyun/al、百度网盘：baidu/bd\n"
+help_content = f"{tab_str}【内容】：搜索内容，多内容用+连接\n"
 help_div = f"{tab_str}-------从以下部分开始为可选内容----------\n"
-help_sort = f"{tab_str}排序: 默认、时间(降序)、精确\n"
-help_type = f"{tab_str}文件类型: '全部类型','视频','音乐','图片','文档','压缩包','其它','文件夹'\n"
-help_exp1 = f"{tab_str}例：纯净搜索\n{tab_str}ps al 数据结构"
-help_exp2 = f"{tab_str}例：排序，\n{tab_str}ps al 数据结构 精确\n"
-help_exp3 = f"{tab_str}例：文件类型，\n{tab_str}ps al 数据结构 默认 视频\n"
-help_exp4 = f"{tab_str}例：排序+文件类型，\n{tab_str}ps al 数据结构 时间 文档\n"
+help_sort = f"{tab_str}【排序】: 默认、时间(降序)、精确\n"
+help_type = f"{tab_str}【文件类型】: 全部类型, 视频, 音乐, 图片, 文档, 压缩包, 其它, 文件夹\n\n"
+help_exp1 = f"{tab_str}例：纯净搜索\n{tab_str}{tab_str}ps al 数据结构"
+help_exp2 = f"{tab_str}例：排序，\n{tab_str}{tab_str}ps al 数据结构 精确\n"
+help_exp3 = f"{tab_str}例：文件类型，\n{tab_str}{tab_str}ps al 数据结构 默认 视频\n"
+help_exp4 = f"{tab_str}例：排序+文件类型，\n{tab_str}{tab_str}ps al 数据结构 时间 文档\n"
 
 
 
