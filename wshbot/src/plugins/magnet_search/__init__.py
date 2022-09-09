@@ -6,7 +6,7 @@ from nonebot.adapters.onebot.v11.message import Message
 from nonebot.params import Arg, CommandArg, ArgPlainText
 
 from . import spider as sp
-mag_search = on_command("mag_search", aliases={"磁链", "磁力", "magnet", "磁链搜索", "磁力搜索"}, priority=5)
+mag_search = on_command("mag_search", aliases={"磁链", "磁力", "magnet", 'ms', "磁链搜索", "磁力搜索"}, priority=5)
 
 
 

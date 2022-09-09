@@ -9,7 +9,7 @@ from ..warden import Warden_User
 
 from . import spider as sp
 
-mag_search = on_command("mag_searchX", aliases={"全资源磁力搜索"}, priority=5)
+mag_search = on_command("mag_searchX", aliases={"全资源磁力搜索", 'msx'}, priority=5)
 
 @mag_search.handle()
 async def handle_first_receive(bot: Bot, event: Event):

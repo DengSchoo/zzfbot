@@ -10,7 +10,6 @@ base_search_url = 'https://clm9.me/search?word='
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.25',
     'cookie': '_ga=GA1.1.1366630586.1656818456; challenge=3339af4017f8a8e35ceaf603cd358f2e; ex=1; _ga_W7KV15XZN0=GS1.1.1662205312.13.1.1662206526.0.0.0'
-
 }
 
 '//*[@id="Search_list_wrapper"]/li[1]/div[1]/div/a'
@@ -48,6 +47,8 @@ def search_res(keyword):
 
 
 tab_str = '    '
+
+tab_str = tab_str + tab_str
 
 
 def get_mag(sec_page):
