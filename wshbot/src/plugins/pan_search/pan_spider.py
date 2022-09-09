@@ -84,6 +84,7 @@ def get_sec_res(url: str) -> str:
     res_type = tab_str + '类别：' + str(
         root.xpath('./van-row[6]/van-col/van-cell/text()')[0]).strip() + '\n'
     size = ''
+    time = ''
     if len(root) == 9:
         time = tab_str + '分享时间：' + str(
             root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n '
@@ -96,7 +97,7 @@ def get_sec_res(url: str) -> str:
     url = tab_str + '资源链接：' + process_js_shell(js_shell) + '\n'
     if 'aliyun' in url:
         url = url.replace('\\', '')
-    return name + type + res_type + time + url
+    return name + type + res_type + size + time + url
 
 
 def process_js_shell(js_shell: str) -> str:
