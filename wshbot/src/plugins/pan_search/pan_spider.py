@@ -87,7 +87,8 @@ def get_sec_res(url: str) -> str:
 
     js_shell = tree.xpath('/html/body/script[3]/text()')[0]
     url = tab_str + '资源链接：' + process_js_shell(js_shell) + '\n'
-
+    if 'aliyun' in url:
+        url.replace('\\', '')
     return name + type + res_type + time + url
 
 
