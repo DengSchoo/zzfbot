@@ -114,6 +114,7 @@ def get_search_type_op(key:str):
 
 def pan_res_search(keyword: str):
     splits = keyword.strip().split(' ')
+    print(''.join(splits))
     lenth = len(splits)
     search_key = ''
     if len == 1 or len == 2:
