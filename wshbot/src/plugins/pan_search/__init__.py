@@ -24,7 +24,7 @@ async def handle_first_receive(bot: Bot, event: Event):
                                           + f"\n {str(key_word)} 磁链搜索结果如下：\n{res}"))
 
 
-pan_search_help = on_command("pan_help", aliases={"网盘搜索帮助",  "help", "pan_help"}, priority=5)
+pan_search_help = on_command("pan_help", aliases={"网盘搜索帮助", "pan_help"}, priority=5)
 
 tab_str = "\t\t"
 
