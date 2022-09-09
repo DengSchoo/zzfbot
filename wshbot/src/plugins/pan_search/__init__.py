@@ -19,7 +19,7 @@ async def handle_first_receive(bot: Bot, event: Event):
     key_word = ','.join(splits[1:])
     search_key = ' '.join(splits[1:])
     # 返回结果
-    res = ps.pan_res_search(str(message).strip())
+    res = ps.pan_res_search(search_key)
     return await pan_search.send(message=Message(f'[CQ:at,qq={int(user_id)}]'
                                           + f"\n {str(key_word)} 磁链搜索结果如下：\n{res}"))
 
