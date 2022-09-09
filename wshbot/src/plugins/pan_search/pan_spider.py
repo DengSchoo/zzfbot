@@ -13,7 +13,7 @@ proxy = '112.80.248.73:80'
 
 proxies = {
     'http': 'http://' + proxy,
-    'https': 'https://' + proxy
+    #'https': 'https://' + proxy
 }
 
 search_url_part = '/search?k='
