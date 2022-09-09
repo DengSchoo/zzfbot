@@ -133,7 +133,7 @@ def pan_res_search(keyword: str):
         return '搜索结果为空！'
     ret_msg = ''
     for idx in range(len(res)):
-        ret_msg += f'\n【{idx}】{res[idx]}'
+        ret_msg += f'\n【{idx + 1}】{res[idx]}'
     return ret_msg
 
 
