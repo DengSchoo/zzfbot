@@ -87,12 +87,12 @@ def get_sec_res(url: str) -> str:
     time = ''
     if len(root) == 9:
         time = tab_str + '分享时间：' + str(
-            root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n '
+            root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n'
     elif len(root) == 10:
         size = tab_str + '文件大小：' + str(
-            root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n '
+            root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n'
         time = tab_str + '分享时间：' + str(
-            root.xpath('./van-row[8]/van-col/van-cell/text()')[0]).strip() + '\n '
+            root.xpath('./van-row[8]/van-col/van-cell/text()')[0]).strip() + '\n'
     js_shell = tree.xpath('/html/body/script[3]/text()')[0]
     url = tab_str + '资源链接：' + process_js_shell(js_shell) + '\n'
     if 'aliyun' in url:
