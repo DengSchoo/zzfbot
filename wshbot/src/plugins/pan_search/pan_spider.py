@@ -9,11 +9,11 @@ from lxml import etree
 aliyun_url = 'https://www.alipansou.com'
 baidu_url = 'https://www.xiongdipan.com'
 
-proxy = '112.80.248.73:80'
+proxy = '120.196.188.21:9091'
 
 proxies = {
     'http': 'http://' + proxy,
-    'https': 'http://' + proxy
+    'https': 'https://' + proxy
 }
 
 search_url_part = '/search?k='
@@ -55,8 +55,8 @@ first_max_num = 3
 
 
 def get_list(url: str, keyword: str) -> list:
-    #result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxies)
-    result = requests.get(url + search_url_part + keyword, headers=headers)
+    result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxies)
+    #result = requests.get(url + search_url_part + keyword, headers=headers)
     tree = etree.HTML(result.text)
     print("text" + result.text + "\n")
     fir_sea_list = tree.xpath(fir_sea_xpath)[0]
@@ -156,3 +156,10 @@ def pan_res_search(keyword: str):
     for idx in range(len(res)):
         ret_msg += f'\n【{idx + 1}】{res[idx]}'
     return ret_msg
+
+
+url = 'http://httpbin.org/ip'
+#headers = {'User-Agent': 'python-spider'}
+proxy = {'http': '代理ip', 'https': '代理ip'}  #在这个字典中可以单一的使用http或是https
+response = requests.get(url=url, headers=headers, proxies=proxies, timeout=6)  #timeout是请求超时设置
+print(response.text)
