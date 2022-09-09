@@ -9,6 +9,8 @@ from lxml import etree
 aliyun_url = 'https://www.alipansou.com'
 baidu_url = 'https://www.xiongdipan.com'
 
+proxy = '113.194.28.190:9999'
+
 search_url_part = '/search?k='
 
 sort_op = {
@@ -38,7 +40,7 @@ search_urls = {
 # https://www.xiongdipan.com/search?k=%E9%9A%90%E5%85%A5%E5%B0%98%E7%83%9F&s=1&t=-1
 
 headers = {
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.25',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.27',
     'cookie': 'test_cookie=CheckForPermission; expires=Fri, 09-Sep-2022 10:08:08 GMT; path=/; domain=.doubleclick.net; Secure; HttpOnly; SameSite=none'
 }
 
@@ -48,7 +50,7 @@ first_max_num = 3
 
 
 def get_list(url: str, keyword: str) -> list:
-    result = requests.get(url + search_url_part + keyword, headers=headers)
+    result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxy)
     tree = etree.HTML(result.text)
     print("text" + result.text + "\n")
     fir_sea_list = tree.xpath(fir_sea_xpath)[0]
