@@ -76,15 +76,22 @@ def get_sec_res(url: str) -> str:
     result = requests.get(url, headers=headers)
     tree = etree.HTML(result.text)
     #print(result.text)
+    root = tree.xpath('/html/body/div/div[1]')[0]
     name = '资源名称：' + str(
-        tree.xpath('/html/body/div/div[1]/van-row[4]/van-col/van-cell/@value')[0]).strip() + '\n'
+        root.xpath('./van-row[4]/van-col/van-cell/@value')[0]).strip() + '\n'
     type = tab_str + '类型：' + str(
-        tree.xpath('/html/body/div/div[1]/van-row[5]/van-col/van-cell/text()')[0]).strip() + '\n'
+        root.xpath('./van-row[5]/van-col/van-cell/text()')[0]).strip() + '\n'
     res_type = tab_str + '类别：' + str(
-        tree.xpath('/html/body/div/div[1]/van-row[6]/van-col/van-cell/text()')[0]).strip() + '\n'
-    time = tab_str + '分享时间：' + str(
-        tree.xpath('/html/body/div/div[1]/van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n '
-
+        root.xpath('./van-row[6]/van-col/van-cell/text()')[0]).strip() + '\n'
+    size = ''
+    if len(root) == 9:
+        time = tab_str + '分享时间：' + str(
+            root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n '
+    elif len(root) == 10:
+        size = tab_str + '文件大小：' + str(
+            root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n '
+        time = tab_str + '分享时间：' + str(
+            root.xpath('./van-row[8]/van-col/van-cell/text()')[0]).strip() + '\n '
     js_shell = tree.xpath('/html/body/script[3]/text()')[0]
     url = tab_str + '资源链接：' + process_js_shell(js_shell) + '\n'
     if 'aliyun' in url:
