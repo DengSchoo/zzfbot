@@ -11,6 +11,11 @@ baidu_url = 'https://www.xiongdipan.com'
 
 proxy = '113.194.28.190:9999'
 
+proxies = {
+    'http': 'http://' + proxy,
+    'https': 'https://' + proxy
+}
+
 search_url_part = '/search?k='
 
 sort_op = {
@@ -50,22 +55,22 @@ first_max_num = 3
 
 
 def get_list(url: str, keyword: str) -> list:
-    result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxy)
+    result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxies)
     tree = etree.HTML(result.text)
     print("text" + result.text + "\n")
     fir_sea_list = tree.xpath(fir_sea_xpath)[0]
     res_list = []
-    #print(len(fir_sea_list))
+    # print(len(fir_sea_list))
     for idx in range(3, min(4 + first_max_num, len(fir_sea_list))):
         href_xpath = './a/@href'
         sub_fix = fir_sea_list[idx].xpath(href_xpath)
-        #print(sub_fix)
+        # print(sub_fix)
         if (len(sub_fix) > 0):
             sec_url_sub = sub_fix[0]
             sec_url = url + sec_url_sub
-            #print(sec_url)
+            # print(sec_url)
             res_list.append(get_sec_res(sec_url))
-    #print(res_list)
+    # print(res_list)
     return res_list
 
 
@@ -77,7 +82,7 @@ tab_str = tab_str + tab_str
 def get_sec_res(url: str) -> str:
     result = requests.get(url, headers=headers)
     tree = etree.HTML(result.text)
-    #print(result.text)
+    # print(result.text)
     root = tree.xpath('/html/body/div/div[1]')[0]
     name = '资源名称：' + str(
         root.xpath('./van-row[4]/van-col/van-cell/@value')[0]).strip() + '\n'
@@ -109,20 +114,24 @@ def process_js_shell(js_shell: str) -> str:
     # print(res)
     return res
 
-def get_search_domain(key:str):
+
+def get_search_domain(key: str):
     if key in search_urls.keys():
         return search_urls[key]
     return aliyun_url
 
-def get_search_sort_op(key:str):
+
+def get_search_sort_op(key: str):
     if key in sort_op.keys():
         return '&s=' + sort_op[key]
     return ''
 
-def get_search_type_op(key:str):
+
+def get_search_type_op(key: str):
     if key in type_op.keys():
         return '&t=' + type_op[key]
     return ''
+
 
 def pan_res_search(keyword: str):
     splits = keyword.strip().split(' ')
@@ -146,5 +155,3 @@ def pan_res_search(keyword: str):
     for idx in range(len(res)):
         ret_msg += f'\n【{idx + 1}】{res[idx]}'
     return ret_msg
-
-
