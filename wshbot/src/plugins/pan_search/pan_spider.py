@@ -113,7 +113,7 @@ def get_search_domain(key:str):
 
 def get_search_sort_op(key:str):
     if key in sort_op.keys():
-        return '&o=' + sort_op[key]
+        return '&s=' + sort_op[key]
     return ''
 
 def get_search_type_op(key:str):
