@@ -7,21 +7,21 @@ from nonebot.params import Arg, CommandArg, ArgPlainText
 from . import pan_spider as ps
 
 
-pan_search = on_command("pan_search", aliases={"网盘",  "网盘搜索", "ps"}, priority=5)
-
-@pan_search.handle()
-async def handle_first_receive(bot: Bot, event: Event):
-    user_id = int(event.get_user_id())
-    # if not Warden_User(int(user_id)):
-    #     return await pan_search.send(Message(f'[CQ:at,qq={int(user_id)}]' + '找王姐或者wsh申请权限~'))
-    message = event.get_message()
-    splits = str(message).strip().split(' ')
-    key_word = ','.join(splits[1:])
-    #search_key = ' '.join(splits[1:])
-    # 返回结果
-    res = ps.pan_res_search(str(message).strip())
-    return await pan_search.send(message=Message(f'[CQ:at,qq={int(user_id)}]'
-                                          + f"\n {str(key_word)} 磁链搜索结果如下：\n{res}"))
+# pan_search = on_command("pan_search", aliases={"网盘",  "网盘搜索", "ps"}, priority=5)
+#
+# @pan_search.handle()
+# async def handle_first_receive(bot: Bot, event: Event):
+#     user_id = int(event.get_user_id())
+#     # if not Warden_User(int(user_id)):
+#     #     return await pan_search.send(Message(f'[CQ:at,qq={int(user_id)}]' + '找王姐或者wsh申请权限~'))
+#     message = event.get_message()
+#     splits = str(message).strip().split(' ')
+#     key_word = ','.join(splits[1:])
+#     #search_key = ' '.join(splits[1:])
+#     # 返回结果
+#     res = ps.pan_res_search(str(message).strip())
+#     return await pan_search.send(message=Message(f'[CQ:at,qq={int(user_id)}]'
+#                                           + f"\n {str(key_word)} 磁链搜索结果如下：\n{res}"))
 
 
 pan_search_help = on_command("pan_help", aliases={"网盘搜索帮助", "pan_help"}, priority=5)
