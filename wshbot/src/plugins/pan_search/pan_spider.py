@@ -85,10 +85,10 @@ def get_sec_res(url: str) -> str:
         root.xpath('./van-row[6]/van-col/van-cell/text()')[0]).strip() + '\n'
     size = ''
     time = ''
-    if len(root) == 9:
+    if len(root) <= 9:
         time = tab_str + '分享时间：' + str(
             root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n'
-    elif len(root) == 10:
+    elif len(root) >= 10:
         size = tab_str + '文件大小：' + str(
             root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n'
         time = tab_str + '分享时间：' + str(
