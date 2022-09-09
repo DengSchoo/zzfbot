@@ -125,11 +125,12 @@ def pan_res_search(keyword: str):
         search_key = splits[1] + get_search_sort_op(splits[2])
     if len == 5:
         search_key = splits[1] + get_search_sort_op(splits[2]) + get_search_type_op(splits[3])
-    res = get_list(domain, search_key)
+    res = get_list(domain, search_key.encode('utf-8'))
     if len(res) == 0:
         return '搜索结果为空！'
     ret_msg = ''
     for idx in range(len(res)):
         ret_msg += f'\n【{idx}】{res[idx]}'
     return ret_msg
+
 

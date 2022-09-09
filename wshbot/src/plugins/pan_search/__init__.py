@@ -15,7 +15,9 @@ async def handle_first_receive(bot: Bot, event: Event):
     # if not Warden_User(int(user_id)):
     #     return await pan_search.send(Message(f'[CQ:at,qq={int(user_id)}]' + '找王姐或者wsh申请权限~'))
     message = event.get_message()
-    key_word = ','.join(str(message).strip().split(' ')[1:])
+    splits = str(message).strip().split(' ')
+    key_word = ','.join(splits[1:])
+    search_key = ' '.join(splits[1:])
     # 返回结果
     res = ps.pan_res_search(str(message).strip())
     return await pan_search.send(message=Message(f'[CQ:at,qq={int(user_id)}]'
