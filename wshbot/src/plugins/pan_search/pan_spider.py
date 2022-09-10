@@ -55,8 +55,8 @@ first_max_num = 3
 
 
 def get_list(url: str, keyword: str) -> list:
-    result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxies)
-    #result = requests.get(url + search_url_part + keyword, headers=headers)
+    #result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxies)
+    result = requests.get(url + search_url_part + keyword, headers=headers)
     tree = etree.HTML(result.text)
     print("text" + result.text + "\n")
     fir_sea_list = tree.xpath(fir_sea_xpath)[0]
