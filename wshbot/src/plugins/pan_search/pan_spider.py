@@ -62,7 +62,7 @@ def get_list(url: str, keyword: str) -> list:
     fir_sea_list = tree.xpath(fir_sea_xpath)[0]
     res_list = []
     # print(len(fir_sea_list))
-    for idx in range(3, min(4 + first_max_num, len(fir_sea_list))):
+    for idx in range(3, min(3 + first_max_num, len(fir_sea_list))):
         href_xpath = './a/@href'
         sub_fix = fir_sea_list[idx].xpath(href_xpath)
         # print(sub_fix)
