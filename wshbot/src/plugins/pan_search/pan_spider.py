@@ -58,7 +58,8 @@ def get_list(url: str, keyword: str) -> list:
     #result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxies)
     result = requests.get(url + search_url_part + keyword, headers=headers)
     tree = etree.HTML(result.text)
-    print("text" + result.text + "\n")
+    #print("text" + result.text + "\n")
+    
     fir_sea_list = tree.xpath(fir_sea_xpath)[0]
     res_list = []
     # print(len(fir_sea_list))
@@ -83,30 +84,26 @@ tab_str = tab_str + tab_str
 def get_sec_res(url: str) -> str:
     result = requests.get(url, headers=headers)
     tree = etree.HTML(result.text)
-    # print(result.text)
+    print(result.text)
     root = tree.xpath('/html/body/div/div[1]')[0]
+
+    ret_msg = ''
     name = '资源名称：' + str(
         root.xpath('./van-row[4]/van-col/van-cell/@value')[0]).strip() + '\n'
-    type = tab_str + '类型：' + str(
-        root.xpath('./van-row[5]/van-col/van-cell/text()')[0]).strip() + '\n'
-    res_type = tab_str + '类别：' + str(
-        root.xpath('./van-row[6]/van-col/van-cell/text()')[0]).strip() + '\n'
-    size = ''
-    time = ''
-    if len(root) <= 10:
-        time = tab_str + '分享时间：' + str(
-            root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n'
-    elif len(root) >= 11:
-        size = tab_str + '文件大小：' + str(
-            root.xpath('./van-row[7]/van-col/van-cell/text()')[0]).strip() + '\n'
-        times = root.xpath('./van-row[8]/van-col/van-cell/text()')
-        if len(times) >= 1:
-            time = tab_str + '分享时间：' + str(times[0]).strip() + '\n'
+    ret_msg += name
+    meta_info = root[4:len(root) - 3]
+    for meta in meta_info:
+        meta_name = str(meta.xpath('./van-col/van-cell/@title')[0]).strip()
+        if meta_name == '密码':
+            meta_val = str(meta.xpath('./van-col/van-cell/b[1]/text()')[0]).strip()
+        else :
+            meta_val = str(meta.xpath('./van-col/van-cell/text()')[0]).strip()
+        ret_msg += f'{tab_str + meta_name + "：" + meta_val}\n'
     js_shell = tree.xpath('/html/body/script[3]/text()')[0]
     url = tab_str + '资源链接：' + process_js_shell(js_shell) + '\n'
     if 'aliyun' in url:
         url = url.replace('\\', '')
-    return name + type + res_type + size + time + url
+    return ret_msg + url
 
 
 def process_js_shell(js_shell: str) -> str:
@@ -158,8 +155,5 @@ def pan_res_search(keyword: str):
     return ret_msg
 
 
-url = 'http://httpbin.org/ip'
-#headers = {'User-Agent': 'python-spider'}
-proxy = {'http': '代理ip', 'https': '代理ip'}  #在这个字典中可以单一的使用http或是https
-response = requests.get(url=url, headers=headers, proxies=proxies, timeout=6)  #timeout是请求超时设置
-print(response.text)
+
+#print(pan_res_search('ps al 黑化律师'))
