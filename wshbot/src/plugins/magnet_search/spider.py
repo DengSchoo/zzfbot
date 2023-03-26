@@ -204,6 +204,11 @@ def get_home_list(tree, path):
 
 # get_res_magnet(test_url)
 
+#<<<<<<< HEAD
+#testUrl('https://m.xiaopian.com/e/search/result/?searchid=96965')
+#print('中文')
+#=======
 # testUrl('https://m.xiaopian.com/e/search/result/?searchid=96965')
-print('中文')
+#print('中文')
+#>>>>>>> 67ed7075ee8c4e074aa15774d556caad9319838f
 # print(request.text)

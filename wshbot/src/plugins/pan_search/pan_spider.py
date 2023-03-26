@@ -79,8 +79,6 @@ def get_list(url: str, keyword: str) -> list:
     #result = requests.get(url + search_url_part + keyword, headers=headers, proxies=proxies)
     result = requests.get(url + search_url_part + keyword, headers=headers, verify=False)
     tree = etree.HTML(result.text)
-    #print("text" + result.text + "\n")
-    
     fir_sea_list = tree.xpath(fir_sea_xpath)[0]
     res_list = []
     # print(len(fir_sea_list))
@@ -103,7 +101,11 @@ tab_str = tab_str + tab_str
 
 
 def get_sec_res(url: str) -> str:
+<<<<<<< HEAD
+    result = requests.get(url, headers=headers, timeout=2)
+=======
     result = requests.get(url, headers=headers, verify=False)
+>>>>>>> 02d2094249877f9a513b8ee1fe8e12f837e563f0
     tree = etree.HTML(result.text)
     #print(result.text)
     root = tree.xpath('/html/body/div/div[1]')[0]
@@ -181,4 +183,8 @@ def pan_res_search(keyword: str):
 
 
 
+<<<<<<< HEAD
+#print(pan_res_search('ps al 黑化律师'))
+=======
 print(pan_res_search('ps al 黑化律师'))
+>>>>>>> 02d2094249877f9a513b8ee1fe8e12f837e563f0
