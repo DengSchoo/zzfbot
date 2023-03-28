@@ -12,8 +12,8 @@ pan_search = on_command("pan_search", aliases={"网盘",  "网盘搜索", "ps"},
 @pan_search.handle()
 async def handle_first_receive(bot: Bot, event: Event):
     user_id = int(event.get_user_id())
-    if not Warden_User(int(user_id)):
-        return await pan_search.send(Message(f'[CQ:at,qq={int(user_id)}]' + '找王姐或者wsh申请权限~'))
+    # if not Warden_User(int(user_id)):
+    #     return await pan_search.send(Message(f'[CQ:at,qq={int(user_id)}]' + '找王姐或者wsh申请权限~'))
     message = event.get_message()
     splits = str(message).strip().split(' ')
     key_word = ', '.join(splits[1:])

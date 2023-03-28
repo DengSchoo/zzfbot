@@ -169,7 +169,7 @@ def pan_res_search(keyword: str):
     if lenth == 5:
         search_key = splits[2] + get_search_sort_op(splits[3]) + get_search_type_op(splits[4])
     res = get_list(domain, search_key)
-    print(domain + search_key)
+    #print(domain + search_key)
     if len(res) == 0:
         return '搜索结果为空！'
     ret_msg = ''
