@@ -38,8 +38,8 @@ async def handle_first_receive(
 async def handle_first_receive(
         bot: Bot,
         event: Event,
-        name: str,
-        uin: str):
+        name,
+        uin):
     user_id = int(event.get_user_id())
     # if not wd.warden_id(str(user_id)):
     #     await mag_search.send(Message(f'[CQ:at, qq={int(user_id)}] √ ⑧ who?'))
