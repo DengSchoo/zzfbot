@@ -59,6 +59,7 @@ async def handle_first_receive(
 
     messages = [to_node(msg) for msg in [to_Message(r) for r in res]]
     is_private = isinstance(event, PrivateMessageEvent)
+    print(is_private)
     if (is_private):
         await bot.call_api(
             "send_private_forward_msg", user_id=event.get_user_id(), messages=messages
