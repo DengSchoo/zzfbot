@@ -52,7 +52,7 @@ async def handle_first_receive(
     res = sp.search_first_list(key_word, choice)
 
     def to_node(msg: Message):
-        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.get_user_id()}", "content": msg}}
+        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.user_id}", "content": msg}}
 
     def to_Message(msg: str):
         return Message(msg)
@@ -62,7 +62,7 @@ async def handle_first_receive(
     print(messages)
     if (is_private):
         await bot.call_api(
-            "send_private_forward_msg", user_id=event.get_user_id(), messages=messages
+            "send_private_forward_msg", user_id=event.user_id, messages=messages
         )
     else:
         await bot.call_api(
