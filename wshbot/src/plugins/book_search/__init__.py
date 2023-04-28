@@ -34,7 +34,7 @@ async def handle_first_receive(
     await book_help.send(Message(f'[CQ:at,qq={int(user_id)}]'
                                  + f"\n{help}"))
 
-
+@book_search.handle()
 async def handle_first_receive(
         bot: Bot,
         event: Event,
