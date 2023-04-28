@@ -55,15 +55,16 @@ async def handle_first_receive(
         return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.user_id}", "content": msg}}
 
     def to_node(msg: str):
-        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.user_id}", "content": msg}}
+        print(Message(msg).extract_plain_text)
+        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.user_id}", "content": to_Message}}
 
-    def to_Message(msg: str):
-        return Message(msg)
+    def to_Message(msg: str) -> str:
+        return Message(msg).extract_plain_text
 
     #messages = [to_node(msg) for msg in [to_Message(r) for r in res]]
     messages = [to_node(msg) for msg in res]
     is_private = isinstance(event, PrivateMessageEvent)
-    print(messages)
+    # print(messages)
     return await book_search.send(Message(f'[CQ:at,qq={int(user_id)}], 为您找到如下结果：{",".join(res)}'))
     if (is_private):
         await bot.call_api(
