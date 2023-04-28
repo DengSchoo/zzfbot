@@ -52,7 +52,7 @@ async def handle_first_receive(
     res = sp.search_first_list(key_word, choice)
 
     def to_node(msg: Message):
-        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": event.get_user_id(), "content": msg}}
+        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f'{event.get_user_id()}', "content": msg}}
 
     def to_Message(msg: str):
         return Message(msg)
