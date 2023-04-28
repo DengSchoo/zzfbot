@@ -17,29 +17,26 @@ book_help = on_command("bk --help", aliases={"bk_help", "bk help"}, priority=5)
 @book_help.handle()
 async def handle_first_receive(
         bot: Bot,
-        event: Event,
-        name: str,
-        uin: str):
+        event: Event):
     user_id = int(event.get_user_id())
     langs = sp.langs
     exts = sp.exts
     contents = sp.contents
     sorts = sp.sorts
     help = f'可选选项，不需要关注顺序\n' \
-          f'\t支持语言：{",".join(langs.keys())}' \
-          f'\t支持文件类型：{",".join(exts)}' \
-          f'\t支持内容搜索：{",".join(contents.keys())}' \
-          f'\t支持排序：{",".join(sorts.keys())}'
+           f'\t支持语言：{",".join(langs.keys())}' \
+           f'\t支持文件类型：{",".join(exts)}' \
+           f'\t支持内容搜索：{",".join(contents.keys())}' \
+           f'\t支持排序：{",".join(sorts.keys())}'
 
     await book_help.send(Message(f'[CQ:at,qq={int(user_id)}]'
                                  + f"\n{help}"))
 
+
 @book_search.handle()
 async def handle_first_receive(
         bot: Bot,
-        event: Event,
-        name,
-        uin):
+        event: Event):
     user_id = int(event.get_user_id())
     # if not wd.warden_id(str(user_id)):
     #     await mag_search.send(Message(f'[CQ:at, qq={int(user_id)}] √ ⑧ who?'))
@@ -55,7 +52,7 @@ async def handle_first_receive(
     res = sp.search_first_list(key_word, choice)
 
     def to_node(msg: Message):
-        return {"type": "node", "data": {"name": name, "uin": uin, "content": msg}}
+        return {"type": "node", "data": {"name": f"{event.group_id,}", "uin": f"{event.get_user_id()}", "content": msg}}
 
     def to_Message(msg: str):
         return Message(msg)
