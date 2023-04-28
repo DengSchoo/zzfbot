@@ -54,10 +54,14 @@ async def handle_first_receive(
     def to_node(msg: Message):
         return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.user_id}", "content": msg}}
 
+    def to_node(msg: str):
+        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.user_id}", "content": msg}}
+
     def to_Message(msg: str):
         return Message(msg)
 
-    messages = [to_node(msg) for msg in [to_Message(r) for r in res]]
+    #messages = [to_node(msg) for msg in [to_Message(r) for r in res]]
+    messages = [to_node(msg) for msg in res]
     is_private = isinstance(event, PrivateMessageEvent)
     print(messages)
     if (is_private):
