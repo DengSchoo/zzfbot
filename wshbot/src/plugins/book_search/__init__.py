@@ -64,7 +64,7 @@ async def handle_first_receive(
     messages = [to_node(msg) for msg in res]
     is_private = isinstance(event, PrivateMessageEvent)
     print(messages)
-    await book_search.send(Message(f'[CQ:at,qq={int(user_id)}], 为您找到如下结果：messages'))
+    return await book_search.send(Message(f'[CQ:at,qq={int(user_id)}], 为您找到如下结果：messages'))
     if (is_private):
         await bot.call_api(
             "send_private_forward_msg", user_id=event.user_id, messages=messages
