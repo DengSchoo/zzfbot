@@ -81,7 +81,7 @@ book_writer = './a/div[2]/div[3]/text()'
 
 book_name = './a/div[2]/h3/text()'
 
-max_size = 4
+max_size = 3
 
 
 def get_url(lang: str, content: str, ext: str, sort: str, q: str) -> str:
