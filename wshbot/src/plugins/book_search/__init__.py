@@ -57,7 +57,7 @@ async def handle_first_receive(
     def to_Message(msg: str):
         return Message(msg)
 
-    messages = [to_node(msg) for msg in (to_Message(r) for r in res)]
+    messages = [to_node(msg) for msg in [to_Message(r) for r in res]]
     is_private = isinstance(event, PrivateMessageEvent)
     if (is_private):
         await bot.call_api(
