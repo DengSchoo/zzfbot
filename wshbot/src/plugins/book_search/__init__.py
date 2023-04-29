@@ -56,7 +56,12 @@ async def handle_first_receive(
 
     def to_node(msg: str):
 
-        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.user_id}", "content": to_Message(msg)}}
+        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": event.user_id, "content": {
+            "type": "text",
+            "data": {
+                "text": f"{msg}"
+            }
+        }}}
 
     def to_Message(msg: str):
         return {
