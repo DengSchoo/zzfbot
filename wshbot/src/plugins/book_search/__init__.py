@@ -15,7 +15,7 @@ book_search = on_command("bs", aliases={"找书", "求书", "book_search", 'bs'}
 
 book_help = on_command("bs_help", aliases={"bk_help", "bk help"}, priority=4)
 
-book_config = on_command("bs_config", aliases={"bk_config", "bk-help"}, priority=4)
+book_config = on_command("bs_config", aliases={"bk_config"}, priority=4)
 
 @book_config.handle()
 async def handle_first_receive(
@@ -25,16 +25,16 @@ async def handle_first_receive(
         return "你没有权限哦~"
     message = event.get_message()
     msg = (str(message)).strip().split(' ')
-    if len(msg) <= 3:
+    if len(msg) <= 2:
         return "参数不合法"
-    item = msg[2]
+    item = msg[1]
     if (item not in cf.config_dic.keys()):
         return "参数不合法"
     # 判断类似是否为bool
     if (cf.config_dic[item] == True or cf.config_dic[item] == False):
-        cf.config_dic[item] = bool(msg[3])
+        cf.config_dic[item] = bool(msg[2])
     else:
-        cf.config_dic[item] = int(msg[3])
+        cf.config_dic[item] = int(msg[2])
     await book_config.send(Message("成功修改配置项"))
 @book_help.handle()
 async def handle_first_receive(
