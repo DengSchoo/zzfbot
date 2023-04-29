@@ -9,10 +9,32 @@ from nonebot.params import Arg, CommandArg, ArgPlainText
 
 from . import spider as sp
 
+from . import config as cf
+
 book_search = on_command("bs", aliases={"找书", "求书", "book_search", 'bs'}, priority=5)
 
-book_help = on_command("bk --help", aliases={"bk_help", "bk help"}, priority=5)
+book_help = on_command("bs --help", aliases={"bk_help", "bk help"}, priority=4)
 
+book_config = on_command("bs config", aliases={"bk_help", "bk help"}, priority=4)
+
+@book_config.handle()
+async def handle_first_receive(
+        bot: Bot,
+        event: Event):
+    if (event.get_user_id() != cf.admin):
+        return "你没有权限哦~"
+    message = event.get_message()
+    msg = (str(message)).strip().split(' ')
+    if len(msg) <= 3:
+        return "参数不合法"
+    item = msg[2]
+    if (item not in cf.config_dic.keys()):
+        return "参数不合法"
+    # 判断类似是否为bool
+    if (cf.config_dic[item] == True or cf.config_dic[item] == False):
+        cf.config_dic[item] = bool(msg[3])
+    else:
+        cf.config_dic[item] = int(msg[3])
 
 @book_help.handle()
 async def handle_first_receive(
@@ -53,7 +75,7 @@ async def handle_first_receive(
 
     def to_node(msg: str):
         user_id = event.user_id
-        if event.user_id==1425123490 or event.user_id== "1425123490":
+        if user_id==1425123490 or user_id== "1425123490":
             user_id = 2948237169
         return {"type": "node", "data": {"name": f"{event.group_id}", "uin": user_id, "content": {
             "type": "text",
@@ -67,6 +89,9 @@ async def handle_first_receive(
     is_private = isinstance(event, PrivateMessageEvent)
     # print(messages)
     #return await book_search.send(Message(f'[CQ:at,qq={int(user_id)}], 为您找到如下结果：{",".join(res)}'))
+    char = "\n"
+    if (cf.config_dic.get('merge_forward') == False):
+        return await book_search.send(Message(f'[CQ:at,qq={int(user_id)}], 为您找到如下结果：{char.join(res)}'))
     if (is_private):
         await bot.call_api(
             "send_private_forward_msg", user_id=event.user_id, messages=messages

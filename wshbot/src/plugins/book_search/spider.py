@@ -5,6 +5,8 @@ import requests
 from lxml import etree
 import urllib3
 
+from . import config as cf
+
 urllib3.disable_warnings()
 # exp : https://zh.annas-archive.org/search?lang=zh&content=&ext=pdf&sort=&q=%E4%B8%8A%E5%B8%9D%E6%8E%B7%E7%AD%9B%E5%AD%9 %E5%9 %97
 
@@ -173,7 +175,7 @@ def search_first_list(q: str, choice: str) -> [str]:
     ret = []
     index = 1
     start = 2
-    for i in range(start, min(max_size + start, len(root[1: len(root) - 1]))):
+    for i in range(start, min(cf.config_dic.get('max_links') + start, len(root[1: len(root) - 1]))):
         root_path = list_start.format(i)
         book_root = root.xpath(root_path)[0]
         # print(root_path)
