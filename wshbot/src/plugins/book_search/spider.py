@@ -132,12 +132,17 @@ def check_book_not_found(text: [str]) -> bool:
 def get_normal_page(book_root, index, ret):
     href = book_root.xpath(href_xpath)[0]
     name = book_root.xpath(book_name)[0]
-    size_ext = book_root.xpath(book_size_and_ext)[0]
-    publish_info = book_root.xpath(book_publish_info)[0]
-    writer = book_root.xpath(book_writer)[0]
+    size_ext = get_xpath_info(book_root, book_size_and_ext)
+    publish_info = get_xpath_info(book_root, book_publish_info)
+    writer = get_xpath_info(book_root, book_writer)
     links = search_tar_book(book_detail + href)
     ret.append(build_book_info(index.__str__(), name, size_ext, publish_info, writer, links))
 
+def get_xpath_info(root, xpath:str):
+    x = root.xpath(xpath)
+    if len(x) == 0:
+        return ""
+    return x[0]
 
 def get_comment_page(book_root, index, ret):
     '/html/body/main/div[3]/div[50]/comment()'
@@ -149,12 +154,11 @@ def get_comment_page(book_root, index, ret):
     root = tree.xpath('/html/body')[0]
     href = root.xpath(href_xpath)[0]
     name = root.xpath(book_name)[0]
-    size_ext = root.xpath(book_size_and_ext)[0]
-    publish_info = root.xpath(book_publish_info)[0]
-    writer = root.xpath(book_writer)[0]
+    size_ext = get_xpath_info(root, book_size_and_ext)
+    publish_info = get_xpath_info(root, book_publish_info)
+    writer = get_xpath_info(root, book_writer)
     links = search_tar_book(book_detail + href)
     ret.append(build_book_info(index.__str__(), name, size_ext, publish_info, writer, links))
-
 
 def search_first_list(q: str, choice: str) -> [str]:
     url = get_url(get_dic(choice, langs), get_dic(choice, contents), get_ext(choice), get_dic(choice, sorts), q)
@@ -208,4 +212,4 @@ def search_tar_book(url: str) -> [str]:
     return links
 
 
-#print(search_first_list('python', '中文'))
+print(search_first_list('优化设计', '中文'))
