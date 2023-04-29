@@ -21,15 +21,15 @@ book_config = on_command("bs_config", aliases={"bk_config"}, priority=4)
 async def handle_first_receive(
         bot: Bot,
         event: Event):
-    if (event.get_user_id() != cf.admin):
-        return "你没有权限哦~"
+    if (int(event.get_user_id()) != cf.admin):
+        return await book_config.send(Message("你没有权限哦"))
     message = event.get_message()
     msg = (str(message)).strip().split(' ')
     if len(msg) <= 2:
-        return "参数不合法"
+        return await book_config.send(Message("参数不合法"))
     item = msg[1]
     if (item not in cf.config_dic.keys()):
-        return "参数不合法"
+        return await book_config.send(Message("参数不合法"))
     # 判断类似是否为bool
     if (cf.config_dic[item] == True or cf.config_dic[item] == False):
         cf.config_dic[item] = bool(msg[2])
