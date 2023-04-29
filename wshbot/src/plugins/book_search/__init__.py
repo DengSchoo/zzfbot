@@ -24,10 +24,10 @@ async def handle_first_receive(
     contents = sp.contents
     sorts = sp.sorts
     help = f'可选选项，不需要关注顺序\n' \
-           f'\t支持语言：{",".join(langs.keys())}' \
-           f'\t支持文件类型：{",".join(exts)}' \
-           f'\t支持内容搜索：{",".join(contents.keys())}' \
-           f'\t支持排序：{",".join(sorts.keys())}'
+           f'\t支持语言：{",".join(langs.keys())}\n' \
+           f'\t支持文件类型：{",".join(exts)}\n' \
+           f'\t支持内容搜索：{",".join(contents.keys())}\n' \
+           f'\t支持排序：{",".join(sorts.keys())}\n'
 
     await book_help.send(Message(f'[CQ:at,qq={int(user_id)}]'
                                  + f"\n{help}"))
@@ -51,25 +51,16 @@ async def handle_first_receive(
         choice = msg[2: len(msg) - 1]
     res = sp.search_first_list(key_word, choice)
 
-    def to_node(msg: Message):
-        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": f"{event.user_id}", "content": msg}}
-
     def to_node(msg: str):
-
-        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": event.user_id, "content": {
+        user_id = event.user_id
+        if event.user_id==1425123490 or event.user_id== "1425123490":
+            user_id = 2948237169
+        return {"type": "node", "data": {"name": f"{event.group_id}", "uin": user_id, "content": {
             "type": "text",
             "data": {
                 "text": f"{msg}"
             }
         }}}
-
-    def to_Message(msg: str):
-        return {
-            "type": "text",
-            "data": {
-                "text": f"{msg}"
-            }
-        }
 
     #messages = [to_node(msg) for msg in [to_Message(r) for r in res]]
     messages = [to_node(msg) for msg in res]
