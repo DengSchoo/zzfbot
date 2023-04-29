@@ -13,9 +13,9 @@ from . import config as cf
 
 book_search = on_command("bs", aliases={"找书", "求书", "book_search", 'bs'}, priority=5)
 
-book_help = on_command("bs --help", aliases={"bk_help", "bk help"}, priority=4)
+book_help = on_command("bs_help", aliases={"bk_help", "bk help"}, priority=4)
 
-book_config = on_command("bs config", aliases={"bk_help", "bk help"}, priority=4)
+book_config = on_command("bs_config", aliases={"bk_config", "bk-help"}, priority=4)
 
 @book_config.handle()
 async def handle_first_receive(
