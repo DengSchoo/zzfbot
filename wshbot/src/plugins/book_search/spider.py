@@ -8,6 +8,8 @@ import urllib3
 from . import config as cf
 
 urllib3.disable_warnings()
+
+
 # exp : https://zh.annas-archive.org/search?lang=zh&content=&ext=pdf&sort=&q=%E4%B8%8A%E5%B8%9D%E6%8E%B7%E7%AD%9B%E5%AD%9 %E5%9 %97
 
 headers = {
@@ -37,6 +39,8 @@ contents = {
     '杂志': 'magazine',
     '标准文档': 'standards_document',
 }
+
+requests.session().keep_alive = False
 
 exts = [
     "pdf",
@@ -214,4 +218,4 @@ def search_tar_book(url: str) -> [str]:
     return links
 
 
-#print(search_first_list('优化设计', '中文'))
+print(search_first_list('优化设计', '中文'))

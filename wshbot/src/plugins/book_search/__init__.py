@@ -35,7 +35,7 @@ async def handle_first_receive(
         cf.config_dic[item] = bool(msg[2])
     else:
         cf.config_dic[item] = int(msg[2])
-    await book_config.send(Message("成功修改配置项"))
+    await book_config.send(Message(f"成功修改配置项:{item}={cf.config_dic[item]}"))
 @book_help.handle()
 async def handle_first_receive(
         bot: Bot,
