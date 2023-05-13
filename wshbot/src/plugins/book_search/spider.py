@@ -15,7 +15,8 @@ urllib3.disable_warnings()
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.27',
     'cookie': '_ga=GA1.1.481167973.1667014847; __gads=ID=216fae9a67a9d5ee-224095a038d900f4:T=1673356318:RT=1673356318:S=ALNI_MYnvxvlAUNHLEe37h13I-CkWhBxrQ; Hm_lvt_02f69e0ba673e328ef49b5fb98dd4601=1677897985,1677936657,1678621279,1679834163; _bid=f34e039111870ec62cac42f73be95917; __gpi=UID=00000ba14569e8e7:T=1673356318:RT=1679834163:S=ALNI_Mb3QzLchd5HxoifHPyvpsdmqPYwxA; _ga_NYNC791BP2=GS1.1.1679834163.28.1.1679834360.0.0.0; _ga_0B2NFC7Z09=GS1.1.1679834163.26.1.1679834360.17.0.0; Hm_lpvt_02f69e0ba673e328ef49b5fb98dd4601=1679834361',
-    'referer': 'https://www.alipansou.com/s/Ye8OmwQDjxXEOqMNRb3HnAZfrxVbP'
+    'referer': 'https://www.alipansou.com/s/Ye8OmwQDjxXEOqMNRb3HnAZfrxVbP',
+    'Connection': 'close'
 }
 
 search = 'https://zh.annas-archive.org/search?lang={}&content={}&ext=pdf{}sort={}&q={}'
@@ -41,6 +42,8 @@ contents = {
 }
 
 requests.session().keep_alive = False
+
+#requests.adapters.DEFAULT_RETRIES = 5
 
 exts = [
     "pdf",
